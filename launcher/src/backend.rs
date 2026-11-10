@@ -2223,16 +2223,6 @@ fn preparer_binary(dir: &Path) -> Option<PathBuf> {
 
 /// Rewrites Mojang's official URLs to the BMCLAPI mirror source.
 fn mirror_url(url: &str) -> String {
-    if let Some(idx) = url.find("/v1/objects/") {
-        let after = &url[idx + 12..];
-        if after.len() >= 40 {
-            let hash = &after[..40];
-            if hash.chars().all(|c| c.is_ascii_hexdigit()) {
-                return format!("https://bmclapi.bangbang93.com/v1/objects/{}", hash);
-            }
-        }
-    }
-
     url.replace(
         "https://piston-data.mojang.com/",
         "https://bmclapi.bangbang93.com/",
@@ -2259,7 +2249,7 @@ fn mirror_url(url: &str) -> String {
     )
 }
 
-/// Downloads Minecraft files from BMCLAPI, bypassing the Microsoft account requirement.
+/// Downloads Minecraft files from mirror/Mojang, bypassing the Microsoft account requirement.
 pub fn download_from_mirror(
     pins: &sources::Pins,
     dir: &Path,
@@ -2267,7 +2257,7 @@ pub fn download_from_mirror(
 ) -> Result<(), String> {
     let v = &pins.version;
     log(format!(
-        "Downloading {v} from BMCLAPI mirror (no Microsoft account required)"
+        "Downloading {v} assets (no Microsoft account required)"
     ));
 
     let os = match sources::Os::current() {
@@ -2279,7 +2269,9 @@ pub fn download_from_mirror(
     let fetch = |url: &str| -> Result<Vec<u8>, String> {
         let rewritten = mirror_url(url);
         let mut body = Vec::new();
-        get(&rewritten)?
+        // Try mirror first, fall back to direct official URL if mirror fails or 404s
+        let response = get(&rewritten).or_else(|_| get(url));
+        response?
             .into_reader()
             .read_to_end(&mut body)
             .map_err(|e| e.to_string())?;
@@ -2287,7 +2279,7 @@ pub fn download_from_mirror(
     };
 
     mojang::download(pins, dir, os, 8, &fetch, &mojang::CANCEL, log)
-        .map_err(|e| format!("• Horizon tried to download {v} from BMCLAPI, but: {e}"))
+        .map_err(|e| format!("• Horizon tried to download {v}, but: {e}"))
 }
 
 /// Downloads the pinned version from Mojang into `dir` when an account in the launcher owns
