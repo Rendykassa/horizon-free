@@ -14,7 +14,7 @@
 <br><br><br><br>
 
 <p align="center">
-  <img src="docs/media/banner.webp" alt="Horizon: the game you know, rebuilt in Rust" width="100%">
+  <img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/banner.webp" alt="Horizon: the game you know, rebuilt in Rust" width="100%">
 </p>
 
 <p align="center">
@@ -35,7 +35,7 @@
 **Minecraft: Java Edition 26.3, rewritten in Rust.** Your worlds, the same rules and the same terrain as the Java game, checked against it by hundreds of differential tests, in one native program with no Java. Free, open source (MIT) and unofficial: you play it with your own copy of Java Edition.
 
 <p align="center">
-  <img src="docs/media/readme/valley.webp" alt="A river valley with a plains village, savanna hills and a cherry grove, seen from above with a long view distance" width="100%">
+  <img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/valley.webp" alt="A river valley with a plains village, savanna hills and a cherry grove, seen from above with a long view distance" width="100%">
 </p>
 
 ## What works today
@@ -52,12 +52,12 @@ Everything below is in the current release.
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/media/readme/sunset.webp" alt="Sunset behind a cherry grove on a hill, with a river below"></td>
-    <td width="50%"><img src="docs/media/readme/nether.webp" alt="A crimson forest in the Nether, with a piglin among the fungi"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/sunset.webp" alt="Sunset behind a cherry grove on a hill, with a river below"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/nether.webp" alt="A crimson forest in the Nether, with a piglin among the fungi"></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/media/readme/survival.webp" alt="Survival in a village square: two villagers, flowers, the hotbar, health and hunger"></td>
-    <td width="50%"><img src="docs/media/readme/multiplayer.webp" alt="Two players in a LAN world: the other player's name tag and the player list"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/survival.webp" alt="Survival in a village square: two villagers, flowers, the hotbar, health and hunger"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/multiplayer.webp" alt="Two players in a LAN world: the other player's name tag and the player list"></td>
   </tr>
 </table>
 
@@ -91,8 +91,8 @@ Get **the Horizon launcher** from [playhorizon.dev](https://playhorizon.dev), or
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/media/readme/launcher-home.webp" alt="The launcher's Home page: the Horizon instance, Play, the version picker, the friend invite field, screenshots and the patch log"></td>
-    <td width="50%"><img src="docs/media/readme/launcher-mods.webp" alt="The launcher's Mods page: Horizon's mod registry with Zoom selected, and tabs for modpacks, resource packs, shader packs and data packs"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/launcher-home.webp" alt="The launcher's Home page: the Horizon instance, Play, the version picker, the friend invite field, screenshots and the patch log"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/Haevafer/horizon-free/main/docs/media/readme/launcher-mods.webp" alt="The launcher's Mods page: Horizon's mod registry with Zoom selected, and tabs for modpacks, resource packs, shader packs and data packs"></td>
   </tr>
 </table>
 
