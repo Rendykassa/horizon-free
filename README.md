@@ -81,12 +81,12 @@ Get the **Horizon Free Launcher** directly from the [Releases](https://github.co
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x64** | [`horizon-launcher-windows-x64.zip`](https://github.com/Rendykassa/horizon-free/releases/latest) | Windows 10 or 11, GPU with DirectX 11/12 or Vulkan |
+| **Windows x64 (Cracked + Mods)** | [`horizon-cracked-windows-x64.zip`](https://github.com/Rendykassa/horizon-free/releases/latest) | Windows 10 or 11, GPU with DirectX 11/12 or Vulkan |
 
 ### How to Install & Play:
-1. **Download**: Go to [Releases](https://github.com/Rendykassa/horizon-free/releases/latest) and download `horizon-launcher-windows-x64.zip`.
-2. **Extract**: Right-click the `.zip` file and select **Extract All** (Ekstrak Semua).
-3. **Run**: Double-click `horizon-launcher.exe` to start the launcher.
+1. **Download**: Go to [Releases](https://github.com/Rendykassa/horizon-free/releases/latest) and download `horizon-cracked-windows-x64.zip`.
+2. **Extract**: Right-click the `.zip` file and select **Extract All** (Ekstrak Semua). Keep all files together in the same folder.
+3. **Run**: Double-click `Jalankan-Horizon-Cracked.bat` (or `horizon-launcher.exe`) to start the cracked launcher.
 4. **Choose Username**: On the top-right profile or Accounts tab, enter your desired offline username.
 5. **Prepare & Play**:
    - If Minecraft is already installed on your PC, the launcher will automatically detect and reuse your vanilla 26.3 assets.

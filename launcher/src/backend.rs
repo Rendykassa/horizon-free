@@ -1034,7 +1034,11 @@ pub fn data_dir() -> PathBuf {
     }
     dirs::data_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("horizon-launcher")
+        .join(if OFFLINE_PLAY {
+            "horizon-launcher-offline"
+        } else {
+            "horizon-launcher"
+        })
 }
 
 /// A canonical path without Windows' verbatim prefix: `canonicalize` gives `\\?\C:\...` there,
@@ -1433,6 +1437,7 @@ pub(crate) fn install_as(
     let _ = fs::remove_dir_all(&target);
     fs::rename(&top, &target).map_err(|e| e.to_string())?;
     fs::write(target.join(COMPLETE), "").map_err(|e| e.to_string())?;
+    apply_cracked_client(&target);
     let _ = fs::remove_dir_all(&partial);
     reuse_prepared_for(tag);
     progress(1.0);
@@ -2853,7 +2858,11 @@ pub fn game_home() -> PathBuf {
     }
     dirs::data_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("horizon")
+        .join(if OFFLINE_PLAY {
+            "horizon-offline"
+        } else {
+            "horizon"
+        })
 }
 
 /// Whether No AI is on: every AI feature hidden and off (`horizon_core::no_ai`, kept in the
@@ -3134,10 +3143,61 @@ pub fn client_command(tag: &str) -> Command {
     cmd
 }
 
+const CRACKED_CLIENT: &str = if cfg!(windows) {
+    "horizon-client-cracked.exe"
+} else {
+    "horizon-client-cracked"
+};
+
+/// If a prebuilt cracked client executable ships beside the launcher (or was cached in
+/// `data_dir()`), install it into `dir` in place of the unpatched upstream binary.
+fn apply_cracked_client(dir: &Path) {
+    if !OFFLINE_PLAY || !dir.is_dir() {
+        return;
+    }
+    let beside_exe = std::env::current_exe()
+        .ok()
+        .and_then(|p| p.parent().map(|d| d.join(CRACKED_CLIENT)))
+        .filter(|p| p.is_file());
+    let cached = data_dir().join(CRACKED_CLIENT);
+    let source = match beside_exe {
+        Some(src) => {
+            let src_len = fs::metadata(&src).ok().map(|m| m.len());
+            let cached_len = fs::metadata(&cached).ok().map(|m| m.len());
+            if src_len.is_some() && src_len != cached_len {
+                if let Some(parent) = cached.parent() {
+                    let _ = fs::create_dir_all(parent);
+                }
+                let _ = fs::copy(&src, &cached);
+            }
+            src
+        }
+        None if cached.is_file() => cached,
+        None => return,
+    };
+    let dst = dir.join(CLIENT);
+    let src_len = fs::metadata(&source).ok().map(|m| m.len());
+    let dst_len = fs::metadata(&dst).ok().map(|m| m.len());
+    let marker = dir.join(".cracked-applied");
+    if !marker.is_file() || (src_len.is_some() && src_len != dst_len) {
+        if fs::copy(&source, &dst).is_ok() {
+            let _ = fs::write(&marker, "");
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                let _ = fs::set_permissions(&dst, fs::Permissions::from_mode(0o755));
+            }
+        }
+    }
+}
+
 /// The game's program: on macOS the one inside the version's Horizon.app, so the Dock and Cmd+Tab
 /// show Horizon's name and icon (game_app.rs); the bare binary elsewhere, or if that fails.
 fn client_program(tag: &str) -> PathBuf {
     let dir = version_dir(tag);
+    if !tag.starts_with("native-") {
+        apply_cracked_client(&dir);
+    }
     #[cfg(target_os = "macos")]
     match crate::game_app::ensure(&dir) {
         Ok(program) => return program,
@@ -3147,7 +3207,11 @@ fn client_program(tag: &str) -> PathBuf {
 }
 
 pub fn server_command(tag: &str, folder: &Path) -> Command {
-    let mut cmd = Command::new(version_dir(tag).join(CLIENT));
+    let dir = version_dir(tag);
+    if !tag.starts_with("native-") {
+        apply_cracked_client(&dir);
+    }
+    let mut cmd = Command::new(dir.join(CLIENT));
     cmd.current_dir(folder)
         .arg("--resources")
         .arg(resources(tag))
