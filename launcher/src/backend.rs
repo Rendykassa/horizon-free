@@ -2063,7 +2063,7 @@ fn refill_own_store(tag: &str) {
     if !own.join("assets/indexes").is_dir()
         || !horizon_prepare::missing_extras(&resources)
             .iter()
-            .any(|(kind, _)| matches!(*kind, "languages" | "sounds"))
+            .any(|(kind, _)| matches!(*kind, "languages" | "sounds" | "panorama"))
         || ASKED.swap(true, std::sync::atomic::Ordering::Relaxed)
     {
         return;

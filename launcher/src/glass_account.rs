@@ -41,6 +41,19 @@ impl Launcher {
 
     /// The player now, the offline names and the field to add one.
     fn glass_who_plays(&mut self, cx: &mut Context<Self>) -> Div {
+        if self.skin.is_none() {
+            if let Some(name) = self
+                .accounts
+                .offline_selected
+                .as_ref()
+                .or(self.accounts.offline.first())
+            {
+                self.skin = Some(skin_page::SkinPanel {
+                    name: name.clone(),
+                    ..Default::default()
+                });
+            }
+        }
         let t = self.theme;
         let now = self.accounts.player();
         let (uuid, name, status) = match &now {
