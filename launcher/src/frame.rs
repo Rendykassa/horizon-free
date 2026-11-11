@@ -543,7 +543,7 @@ impl Launcher {
                 "horizon-free",
                 "Horizon-Free",
                 "globe-02",
-                "https://github.com/Haevafer/horizon-free".to_string(),
+                "https://github.com/Rendykassa/horizon-free".to_string(),
             )));
         }
         if !self.links.discord.is_empty() {

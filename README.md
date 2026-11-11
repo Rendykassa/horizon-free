@@ -7,7 +7,7 @@
 > - **Standard Java UUID Parity**: Uses authentic Minecraft MD5 v3 offline UUIDs to keep your save data and inventory intact.
 > - **Telemetry Disabled**: `HORIZON_TELEMETRY_URL` is completely turned off.
 >
-> You can download the latest builds in the [RELEASES](https://github.com/Haevafer/horizon-free/releases/latest) section.
+> You can download the latest builds in the [RELEASES](https://github.com/Rendykassa/horizon-free/releases/latest) section.
 >
 > Lower part of the README is fully original.
 
@@ -77,14 +77,14 @@ Everything below is in the current release.
 
 ## Download & Quick Start
 
-Get the **Horizon Free Launcher** directly from the [Releases](https://github.com/Haevafer/horizon-free/releases/latest) section of this repository.
+Get the **Horizon Free Launcher** directly from the [Releases](https://github.com/Rendykassa/horizon-free/releases/latest) section of this repository.
 
 | Platform | Download | Requirements |
 | --- | --- | --- |
-| **Windows x64** | [`horizon-launcher-windows-x64.zip`](https://github.com/Haevafer/horizon-free/releases/latest) | Windows 10 or 11, GPU with DirectX 11/12 or Vulkan |
+| **Windows x64** | [`horizon-launcher-windows-x64.zip`](https://github.com/Rendykassa/horizon-free/releases/latest) | Windows 10 or 11, GPU with DirectX 11/12 or Vulkan |
 
 ### How to Install & Play:
-1. **Download**: Go to [Releases](https://github.com/Haevafer/horizon-free/releases/latest) and download `horizon-launcher-windows-x64.zip`.
+1. **Download**: Go to [Releases](https://github.com/Rendykassa/horizon-free/releases/latest) and download `horizon-launcher-windows-x64.zip`.
 2. **Extract**: Right-click the `.zip` file and select **Extract All** (Ekstrak Semua).
 3. **Run**: Double-click `horizon-launcher.exe` to start the launcher.
 4. **Choose Username**: On the top-right profile or Accounts tab, enter your desired offline username.
