@@ -2672,7 +2672,13 @@ pub fn preparer(
                 assets_folder(resolved, &chosen, &version, log)
             } else {
                 match resolved? {
-                    sources::Resolved::Folder(dir) => dir,
+                    sources::Resolved::Folder(dir) => {
+                        if OFFLINE_PLAY {
+                            // Ensure all libraries and files required for this version are present
+                            let _ = download_for_owner(&pins, &dir, &fetch, log);
+                        }
+                        dir
+                    }
                     sources::Resolved::NotFound(checked) => {
                         let not_found = sources::not_found(&version, &checked, minecraft);
                         download_for_owner(&pins, &own, &fetch, log).map_err(|e| not_found + &e)?;
