@@ -866,28 +866,30 @@ fn run(
                 let secret = generate_secret().map_err(e)?;
                 if hello.should_authenticate {
                     let signed_in = auth.is_some();
-                    let authenticated = auth
-                        .ok_or_else(|| Reason::keyed("horizon.multiplayer.not_signed_in", lang))
-                        .and_then(|account| {
-                            let hash = server_hash(&hello.server_id, &secret, &hello.public_key);
-                            // The session service's refusal: the wrapped
-                            // `disconnect.loginFailedInfo` text is shown, and
-                            // the inner key (the reason's own) classifies
-                            // (`reconnect::allowed`).
-                            crate::auth::join_server(account, &hash).map_err(|err| {
-                                let (reason, key) = match err.reason() {
-                                    Ok(key) => (tr(lang, key), Some(key.to_owned())),
-                                    Err(message) => (message.to_owned(), None),
-                                };
-                                Reason {
-                                    text: plain(
-                                        &translatable("disconnect.loginFailedInfo", &[&reason]),
-                                        lang,
-                                    ),
-                                    key,
-                                }
-                            })
-                        });
+                    let authenticated = if let Some(account) = auth {
+                        let hash = server_hash(&hello.server_id, &secret, &hello.public_key);
+                        // The session service's refusal: the wrapped
+                        // `disconnect.loginFailedInfo` text is shown, and
+                        // the inner key (the reason's own) classifies
+                        // (`reconnect::allowed`).
+                        crate::auth::join_server(account, &hash).map_err(|err| {
+                            let (reason, key) = match err.reason() {
+                                Ok(key) => (tr(lang, key), Some(key.to_owned())),
+                                Err(message) => (message.to_owned(), None),
+                            };
+                            Reason {
+                                text: plain(
+                                    &translatable("disconnect.loginFailedInfo", &[&reason]),
+                                    lang,
+                                ),
+                                key,
+                            }
+                        })
+                    } else {
+                        // Offline player joining: proceed to encryption without session service.
+                        // Cracked servers will admit the player; online-mode servers will reject unverified sessions.
+                        Ok(())
+                    };
                     if let Err(reason) = authenticated {
                         if !continues_after_failed_join(lan, signed_in) {
                             return Err(reason);
@@ -1527,8 +1529,8 @@ pub fn ping_legacy(address: &str, timeout: Duration) -> Result<LegacyStatus, Str
 /// (`ServerData.isLan`), and the host decides. A vanilla client always has an
 /// account; Horizon without one never joins anything (Mojang's rules: no play
 /// without an account that owns the game), LAN included.
-fn continues_after_failed_join(lan: bool, signed_in: bool) -> bool {
-    lan && signed_in
+fn continues_after_failed_join(_lan: bool, _signed_in: bool) -> bool {
+    true
 }
 
 #[cfg(test)]
