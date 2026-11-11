@@ -14,9 +14,9 @@ pub(super) struct SkinPanel {
     /// The offline name it is for.
     pub(super) name: String,
     /// The two previews, baked at the window's scale (skin, cape), or None without one.
-    seen: Option<(f32, Preview, Preview)>,
+    pub(super) seen: Option<(f32, Preview, Preview)>,
     /// What the last choice did, or why not.
-    note: Option<Result<String, String>>,
+    pub(super) note: Option<Result<String, String>>,
 }
 
 /// Points per skin texel in the preview.

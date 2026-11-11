@@ -48,10 +48,7 @@ impl Launcher {
                 .as_ref()
                 .or(self.accounts.offline.first())
             {
-                self.skin = Some(skin_page::SkinPanel {
-                    name: name.clone(),
-                    ..Default::default()
-                });
+                self.open_skin(name.clone());
             }
         }
         let t = self.theme;
